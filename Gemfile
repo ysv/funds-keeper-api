@@ -14,6 +14,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
   gem 'grape_on_rails_routes', '~> 0.3.2'
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
