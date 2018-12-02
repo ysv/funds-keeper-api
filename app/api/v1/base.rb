@@ -10,6 +10,9 @@ module API::V1
 
     do_not_route_options!
 
+    use Auth::Middleware
+    helpers API::V1::Helpers
+
     rescue_from(ActiveRecord::RecordNotFound) do |_e|
       error!('Record is not found', 404)
     end
@@ -20,10 +23,14 @@ module API::V1
 
     rescue_from(:all) do |error|
       Rails.logger.error "#{error.class}: #{error.message}"
-      binding.pry
       error!('Something went wrong', 500)
     end
-
     mount Timestamp
+
+    # The documentation is accessible at http://localhost:3000/api/v1/swagger
+    add_swagger_documentation base_path:   'v1',
+                              mount_path:  '/swagger',
+                              api_version: 'v1'
+
   end
 end

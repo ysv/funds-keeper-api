@@ -8,6 +8,11 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'grape', '~> 1.1.0'
 gem 'grape-entity', '~> 0.7.1'
 gem 'grape_logging', '~> 1.8.0'
+gem 'grape-swagger', '~> 0.30.1'
+gem 'grape-swagger-entity', '~> 0.2.5'
+gem 'peatio'
+gem 'faraday', '~> 0.14.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
