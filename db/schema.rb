@@ -12,23 +12,23 @@
 
 ActiveRecord::Schema.define(version: 2018_12_02_202047) do
 
-  create_table "expenses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "expense_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "user_uid", limit: 25, null: false
     t.string "base_currency", limit: 10, default: "usd", null: false
     t.decimal "month_expenses", precision: 12, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "user_uid"], name: "index_expenses_on_name_and_user_uid", unique: true
+    t.index ["name", "user_uid"], name: "index_expense_categories_on_name_and_user_uid", unique: true
   end
 
-  create_table "keeps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "keep_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "user_uid", limit: 25, null: false
     t.string "base_currency", limit: 10, default: "usd", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "user_uid"], name: "index_keeps_on_name_and_user_uid", unique: true
+    t.index ["name", "user_uid"], name: "index_keep_accounts_on_name_and_user_uid", unique: true
   end
 
   create_table "operations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

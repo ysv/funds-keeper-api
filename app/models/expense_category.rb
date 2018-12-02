@@ -1,13 +1,11 @@
-module Accounts
-  class Expense < Account
-
-  end
+class ExpenseCategory < ApplicationRecord
+  include HasManyOperations
 end
 
 # == Schema Information
-# Schema version: 20181202200448
+# Schema version: 20181202202047
 #
-# Table name: expenses
+# Table name: expense_categories
 #
 #  id             :bigint(8)        not null, primary key
 #  name           :string(255)      not null
@@ -19,5 +17,5 @@ end
 #
 # Indexes
 #
-#  index_expenses_on_name_and_user_uid  (name,user_uid) UNIQUE
+#  index_expense_categories_on_name_and_user_uid  (name,user_uid) UNIQUE
 #

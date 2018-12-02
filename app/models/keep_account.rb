@@ -1,13 +1,11 @@
-module Accounts
-  class Keep < Account
-
-  end
+class KeepAccount < ApplicationRecord
+  include HasManyOperations
 end
 
 # == Schema Information
-# Schema version: 20181202200448
+# Schema version: 20181202202047
 #
-# Table name: keeps
+# Table name: keep_accounts
 #
 #  id            :bigint(8)        not null, primary key
 #  name          :string(255)      not null
@@ -18,5 +16,5 @@ end
 #
 # Indexes
 #
-#  index_keeps_on_name_and_user_uid  (name,user_uid) UNIQUE
+#  index_keep_accounts_on_name_and_user_uid  (name,user_uid) UNIQUE
 #
