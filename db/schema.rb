@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_02_200448) do
+ActiveRecord::Schema.define(version: 2018_12_02_202047) do
 
   create_table "expenses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2018_12_02_200448) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "user_uid"], name: "index_keeps_on_name_and_user_uid", unique: true
+  end
+
+  create_table "operations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "account_type", null: false
+    t.bigint "account_id", null: false
+    t.decimal "debit", precision: 12, scale: 2, default: "0.0", null: false
+    t.decimal "credit", precision: 12, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_type", "account_id"], name: "index_operations_on_account_type_and_account_id"
   end
 
 end
