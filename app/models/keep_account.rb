@@ -1,5 +1,6 @@
 class KeepAccount < ApplicationRecord
   include HasManyOperations
+  has_many :incomes
 end
 
 # == Schema Information

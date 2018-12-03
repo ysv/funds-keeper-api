@@ -1,5 +1,6 @@
 class ExpenseCategory < ApplicationRecord
   include HasManyOperations
+  has_many :expenses
 end
 
 # == Schema Information

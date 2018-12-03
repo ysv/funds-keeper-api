@@ -16,7 +16,8 @@ module API::V1
                values: CurrencyRatesService.currencies.yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
       optional :initial_balance,
                type: BigDecimal,
-               default: 0.to_d
+               default: 0.to_d,
+               values: 0.to_d..10**10.to_d
     end
     post '/accounts/keep' do
       ka = KeepAccount.create!(

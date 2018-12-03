@@ -1,6 +1,8 @@
 class Operation < ApplicationRecord
   attribute :recorded_at, :datetime, default: -> { Time.now }
 
+  validates :debit, :credit, numericality: { greater_than_or_equal_to: 0 }
+
   belongs_to :account, polymorphic: true
   belongs_to :parent, polymorphic: true
   before_validation(on: :create) { self.recorded_at = parent.recorded_at }
