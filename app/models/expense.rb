@@ -4,8 +4,8 @@ class Expense < ApplicationRecord
   belongs_to :keep_account
   belongs_to :expense_category
 
-  has_one :income_operation, as: :parent
-  has_one :expense_operation, as: :parent
+  has_one :income_operation,  as: :parent, class_name: 'Operation'
+  has_one :expense_operation, as: :parent, class_name: 'Operation'
 end
 
 # == Schema Information
@@ -14,7 +14,6 @@ end
 # Table name: expenses
 #
 #  id                  :bigint(8)        not null, primary key
-#  amount              :decimal(12, 2)   not null
 #  description         :string(255)
 #  keep_account_id     :bigint(8)
 #  expense_category_id :bigint(8)

@@ -2,12 +2,18 @@ class CurrencyRatesService
 
   attr_accessor :base
 
+  class << self
+    def currencies
+      ["USD", "BGN", "CAD", "BRL", "HUF", "DKK", "JPY", "ILS", "TRY", "RON", "GBP", "PHP", "HRK", "NOK", "ZAR", "MXN", "AUD", "USD", "KRW", "HKD", "EUR", "ISK", "CZK", "THB", "MYR", "NZD", "PLN", "CHF", "SEK", "CNY", "SGD", "INR", "IDR", "RUB"]
+    end
+  end
+
   def initialize(base)
     @base = base.upcase.to_s
   end
 
   def cache_key
-    "#{base}-currency-rates"
+    "#{base}-rates"
   end
 
   def rate(quote)

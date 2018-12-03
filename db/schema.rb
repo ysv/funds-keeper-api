@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2018_12_02_211259) do
   end
 
   create_table "expenses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.decimal "amount", precision: 12, scale: 2, null: false
     t.string "description"
     t.bigint "keep_account_id"
     t.bigint "expense_category_id"
@@ -35,7 +34,6 @@ ActiveRecord::Schema.define(version: 2018_12_02_211259) do
   end
 
   create_table "incomes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.decimal "amount", precision: 12, scale: 2, null: false
     t.string "description"
     t.bigint "keep_account_id"
     t.datetime "recorded_at"
@@ -60,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_211259) do
     t.bigint "parent_id", null: false
     t.decimal "debit", precision: 12, scale: 2, default: "0.0", null: false
     t.decimal "credit", precision: 12, scale: 2, default: "0.0", null: false
+    t.datetime "recorded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_type", "account_id"], name: "index_operations_on_account_type_and_account_id"

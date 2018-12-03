@@ -1,8 +1,9 @@
 class Operation < ApplicationRecord
-  attribute :recorded_at, :datetime, default: -> { parent.recorded_at }
+  attribute :recorded_at, :datetime, default: -> { Time.now }
 
   belongs_to :account, polymorphic: true
   belongs_to :parent, polymorphic: true
+  before_validation(on: :create) { self.recorded_at = parent.recorded_at }
 end
 
 # == Schema Information

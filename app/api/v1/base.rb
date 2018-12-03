@@ -26,6 +26,7 @@ module API::V1
       error!('Something went wrong', 500)
     end
     mount Timestamp
+    mount Account
 
     # The documentation is accessible at http://localhost:3000/api/v1/swagger
     add_swagger_documentation base_path:   'v1',

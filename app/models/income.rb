@@ -2,7 +2,11 @@ class Income < ApplicationRecord
   attribute :recorded_at, :datetime, default: -> { Time.now }
 
   belongs_to :keep_account
-  has_one :income_operation
+  has_one :income_operation, as: :parent, class_name: 'Operation'
+
+  def record_operation!(amount)
+    Operation.create(credit: amount, parent: self, account: keep_account)
+  end
 end
 
 # == Schema Information
@@ -11,7 +15,6 @@ end
 # Table name: incomes
 #
 #  id              :bigint(8)        not null, primary key
-#  amount          :decimal(12, 2)   not null
 #  description     :string(255)
 #  keep_account_id :bigint(8)
 #  recorded_at     :datetime
