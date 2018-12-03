@@ -10,7 +10,7 @@ gem 'grape-entity', '~> 0.7.1'
 gem 'grape_logging', '~> 1.8.0'
 gem 'grape-swagger', '~> 0.30.1'
 gem 'grape-swagger-entity', '~> 0.2.5'
-gem 'peatio'
+gem 'peatio', git: 'git@github.com:ysv/peatio-core.git', branch: 'funds-keeper-api'
 gem 'faraday', '~> 0.14.0'
 
 
