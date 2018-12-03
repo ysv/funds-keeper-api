@@ -13,7 +13,7 @@ module API::V1
       optional :base_currency,
                type: String,
                default: 'usd',
-               values: CurrencyRatesService.currencies.yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
+               values: CurrencyRatesService.currencies
       optional :initial_balance,
                type: BigDecimal,
                default: 0.to_d,

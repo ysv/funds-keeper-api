@@ -28,6 +28,7 @@ module API::V1
     mount Timestamp
     mount Account
     mount Income
+    mount Rates
 
     # The documentation is accessible at http://localhost:3000/api/v1/swagger
     add_swagger_documentation base_path:   'v1',

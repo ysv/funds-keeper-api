@@ -4,7 +4,19 @@ class CurrencyRatesService
 
   class << self
     def currencies
-      ["USD", "BGN", "CAD", "BRL", "HUF", "DKK", "JPY", "ILS", "TRY", "RON", "GBP", "PHP", "HRK", "NOK", "ZAR", "MXN", "AUD", "USD", "KRW", "HKD", "EUR", "ISK", "CZK", "THB", "MYR", "NZD", "PLN", "CHF", "SEK", "CNY", "SGD", "INR", "IDR", "RUB"]
+      ["USD", "BGN", "CAD",
+       "BRL", "HUF", "DKK",
+       "JPY", "ILS", "TRY",
+       "RON", "GBP", "PHP",
+       "HRK", "NOK", "ZAR",
+       "MXN", "AUD", "USD",
+       "KRW", "HKD", "EUR",
+       "ISK", "CZK", "THB",
+       "MYR", "NZD", "PLN",
+       "CHF", "SEK", "CNY",
+       "SGD", "INR", "IDR",
+       "RUB"]
+        .yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
     end
   end
 
