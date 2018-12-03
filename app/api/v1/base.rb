@@ -30,6 +30,7 @@ module API::V1
     mount Income
     mount Rates
     mount Expense
+    mount Balance
 
     # The documentation is accessible at http://localhost:3000/api/v1/swagger
     add_swagger_documentation base_path:   'v1',

@@ -13,6 +13,16 @@ class Expense < ApplicationRecord
       Operation.create(credit: quote_amount, parent: self, account: expense_category)
     end
   end
+
+  class << self
+    def total_by(user_uid:, from: nil, to: nil)
+      ka = KeepAccount.where(user_uid: user_uid)
+      op = Operation.where(account: ka)
+      op = op.where('recorded_at > ?', from) if from.present?
+      op = op.where('recorded_at < ?', to) if to.present?
+      op.sum(:debit)
+    end
+  end
 end
 
 # == Schema Information

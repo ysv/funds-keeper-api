@@ -20,6 +20,7 @@ end
 #  parent_id    :bigint(8)        not null
 #  debit        :decimal(12, 2)   default(0.0), not null
 #  credit       :decimal(12, 2)   default(0.0), not null
+#  recorded_at  :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

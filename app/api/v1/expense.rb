@@ -52,7 +52,6 @@ module API::V1
           keep_account: ka,
           expense_category: ec)
 
-        binding.pry
         quote_amount = params[:quote_amount] ||
           params[:base_amount] * ::CurrencyRatesService.new(ka.base_currency).rate(ec.base_currency)
         expense.record_operations!(

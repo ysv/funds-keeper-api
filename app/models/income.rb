@@ -7,6 +7,16 @@ class Income < ApplicationRecord
   def record_operation!(amount)
     Operation.create(credit: amount, parent: self, account: keep_account)
   end
+
+  class << self
+    def total_by(user_uid:, from: nil, to: nil)
+      ka = KeepAccount.where(user_uid: user_uid)
+      op = Operation.where(account: ka)
+      op = op.where('recorded_at > ?', from) if from.present?
+      op = op.where('recorded_at < ?', to) if to.present?
+      op.sum(:credit)
+    end
+  end
 end
 
 # == Schema Information
