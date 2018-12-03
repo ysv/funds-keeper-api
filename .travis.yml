@@ -1,0 +1,37 @@
+dist: trusty
+
+sudo: required
+
+language: ruby
+
+cache: bundler
+
+env:
+- RAILS_ENV=test
+  RAKE_ENV=test
+
+services:
+- mysql
+- docker
+
+# Execute all of the commands which need to be executed before installing dependencies.
+before_install:
+- gem install bundler
+- . $HOME/.nvm/nvm.sh
+- nvm install 8
+- nvm use 8
+
+# Execute all of the commands which should install application dependencies.
+install:
+- bundle install --deployment --without production development --jobs=$(nproc) --retry=3
+
+# Execute all of the commands which need to be executed before running actual tests.
+before_script:
+- bundle exec rake db:create db:migrate
+
+# Execute all of the commands which should make the build pass or fail.
+script:
+  bundle exec rspec
+  docker build --tag funds-keeper-api:latest .
+
+

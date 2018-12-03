@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:ysv/peatio-core.git
+  remote: https://git@github.com/ysv/peatio-core
   revision: 23a695d008e08a074b33f5461b406b08c126f3cc
   branch: funds-keeper-api
   specs:
