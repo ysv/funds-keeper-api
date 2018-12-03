@@ -4,8 +4,15 @@ class Expense < ApplicationRecord
   belongs_to :keep_account
   belongs_to :expense_category
 
-  has_one :income_operation,  as: :parent, class_name: 'Operation'
-  has_one :expense_operation, as: :parent, class_name: 'Operation'
+  has_one :income_operation, -> { where(credit: 0)}, as: :parent, class_name: 'Operation'
+  has_one(:expense_operation, -> { where(debit: 0)}, as: :parent, class_name: 'Operation')
+
+  def record_operations!(base_amount:, quote_amount:)
+    transaction do
+      Operation.create(debit: base_amount, parent: self, account: keep_account)
+      Operation.create(credit: quote_amount, parent: self, account: expense_category)
+    end
+  end
 end
 
 # == Schema Information
