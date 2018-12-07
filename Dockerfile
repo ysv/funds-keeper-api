@@ -22,7 +22,7 @@ RUN chown -R app:app $APP_HOME
 # Switch to application user.
 USER app
 
-EXPOSE 3000
+EXPOSE 8080
 
 # The main command to run when the container starts. Also
 # tell the Rails dev server to bind to all interfaces by

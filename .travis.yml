@@ -31,7 +31,7 @@ before_script:
 
 # Execute all of the commands which should make the build pass or fail.
 script:
-  bundle exec rspec
+  bundle exec rspec &&
   docker build --tag funds-keeper-api:latest .
 
 
