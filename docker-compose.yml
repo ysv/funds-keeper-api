@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    container_name: funds-keeper-db
+
+
+  api:
+    image: syaroslav/funds-keeper-api:0.0.2
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      RAILS_ENV: development
+    container_name: funds-keeper-api
+
+volumes:
+  mysql_data:
