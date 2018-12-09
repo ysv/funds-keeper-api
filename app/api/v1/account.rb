@@ -2,7 +2,7 @@ module API::V1
   class Account < Grape::API
     desc 'Get Keep Accounts for user'
     get '/accounts/keep' do
-      KeepAccount.where(user_uid: uid)
+      present KeepAccount.where(user_uid: uid), with: Entities::KeepAccount
     end
 
     desc 'Create Keep Account'
@@ -26,10 +26,9 @@ module API::V1
         base_currency: params[:base_currency]
       )
       unless params[:initial_balance].zero?
-        income = Income.create!(keep_account: ka, description: 'Initial account balance income')
-        income.record_operation!(params[:initial_balance])
+        ka.create_initial_income!(params[:initial_balance])
       end
-      ka
+      present ka, with: Entities::KeepAccount
     end
 
 
@@ -48,7 +47,7 @@ module API::V1
                type: String,
                default: 'usd',
                values: CurrencyRatesService.currencies.yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
-      optional :month_expenses,
+      optional :month_expense,
                type: BigDecimal,
                default: 0.to_d
     end
@@ -56,7 +55,8 @@ module API::V1
       ExpenseCategory.create!(
         user_uid: uid,
         name: params[:name],
-        base_currency: params[:base_currency]
+        base_currency: params[:base_currency],
+        month_expense: params[:month_expense]
       )
     end
   end

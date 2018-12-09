@@ -13,14 +13,18 @@ gem 'grape-swagger-entity', '~> 0.2.5'
 gem 'peatio', git: 'https://git@github.com/ysv/peatio-core', branch: 'funds-keeper-api'
 gem 'puma', '~> 3.12.0'
 gem 'faraday', '~> 0.14.0'
+gem 'memoist'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
   gem 'grape_on_rails_routes', '~> 0.3.2'
   gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'webmock'
 end
 
 group :development do

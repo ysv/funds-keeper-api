@@ -14,14 +14,12 @@ module API::V1
       #
       # @param [Hash] options
       # @return [String, Member, NilClass]
-      def authenticate!()
+      def authenticate!
         payload, header = Peatio::Auth::JWTAuthenticator
                               .new(Utils.jwt_public_key)
                               .authenticate!(@token)
 
         payload.fetch(:nickname)
-      rescue
-        'remove@me'
       rescue => e
         if Peatio::Auth::Error === e
           raise e

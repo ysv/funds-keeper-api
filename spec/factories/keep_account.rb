@@ -1,14 +1,14 @@
-class KeepAccount < ApplicationRecord
-  include HasManyOperations
-  has_many :incomes
-  has_many :expenses
+FactoryBot.define do
+  factory :keep_account do
+    name { Faker::Bank.name }
+    base_currency { CurrencyRatesService.currencies.sample }
+    user_uid { Faker::Auth.uid }
 
-  def create_initial_income!(amount)
-    income = Income.create!(
-      keep_account: self,
-      description: 'Initial account balance income'
-    )
-    income.record_operation!(amount)
+    trait :with_initial_balance do
+      after(:create) do |ka|
+        ka.create_initial_income(Faker::Number.decimal(12, 2))
+      end
+    end
   end
 end
 

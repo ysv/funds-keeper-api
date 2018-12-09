@@ -2,8 +2,6 @@ module API::V1
   class Base < Grape::API
     version 'v1', using: :path
 
-    cascade false
-
     format         :json
     content_type   :json, 'application/json'
     default_format :json
@@ -17,14 +15,20 @@ module API::V1
       error!('Record is not found', 404)
     end
 
+    rescue_from Peatio::Auth::Error do |e|
+      Rails.logger.error "#{e.class}: #{e.message}"
+      error!({ error: { code: e.code, message: 'Authentication failed' } }, 401)
+    end
+
     rescue_from(Grape::Exceptions::ValidationErrors) do |error|
       error!(error.message, 400)
     end
 
-    rescue_from(:all) do |error|
-      Rails.logger.error "#{error.class}: #{error.message}"
+    rescue_from(:all) do |e|
+      Rails.logger.error "#{e.class}: #{e.message}"
       error!('Something went wrong', 500)
     end
+
     mount Timestamp
     mount Account
     mount Income
