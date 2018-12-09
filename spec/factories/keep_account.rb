@@ -1,14 +1,18 @@
 FactoryBot.define do
+  sequence(:balance) { Faker::Number.decimal(3, 2) }
+
   factory :keep_account do
-    name { Faker::Bank.name }
+    name { Faker::Bank.unique.name }
     base_currency { CurrencyRatesService.currencies.sample }
     user_uid { Faker::Auth.uid }
 
-    trait :with_initial_balance do
+    trait :with_balance do
       after(:create) do |ka|
-        ka.create_initial_income(Faker::Number.decimal(12, 2))
+        ka.create_initial_income!(generate(:balance))
       end
     end
+
+    factory :keep_account_with_balance, traits: [:with_balance]
   end
 end
 

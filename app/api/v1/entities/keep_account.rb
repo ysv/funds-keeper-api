@@ -18,6 +18,12 @@ module API::V1
               desc: 'Account Current Balance',
               type: BigDecimal,
             }
+
+     expose :user_uid,
+            documentation: {
+              desc: 'User Uniq ID',
+              type: String,
+            }
    end
  end
 end

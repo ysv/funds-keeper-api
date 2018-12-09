@@ -17,7 +17,7 @@ module API::V1
 
     rescue_from Peatio::Auth::Error do |e|
       Rails.logger.error "#{e.class}: #{e.message}"
-      error!({ error: { code: e.code, message: 'Authentication failed' } }, 401)
+      error!({ error: { code: e.code, message: 'Authentication failed.' } }, 401)
     end
 
     rescue_from(Grape::Exceptions::ValidationErrors) do |error|
