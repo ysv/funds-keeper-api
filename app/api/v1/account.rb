@@ -1,6 +1,9 @@
 module API::V1
   class Account < Grape::API
-    desc 'Get Keep Accounts for user'
+    # GET: /api/v1/accounts/keep.
+    desc 'Get Keep Accounts for user',
+         is_array: true,
+         success: Entities::KeepAccount
     get '/accounts/keep' do
       present KeepAccount.where(user_uid: uid), with: Entities::KeepAccount
     end

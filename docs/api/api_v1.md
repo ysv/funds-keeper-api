@@ -24,7 +24,7 @@ API title
 | ---- | ---------- | ----------- | -------- | ---- |
 | name | formData | Account name. | Yes | string |
 | base_currency | formData |  | No | string |
-| month_expenses | formData |  | No | double |
+| month_expense | formData |  | No | double |
 
 **Responses**
 
@@ -65,9 +65,9 @@ API title
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Get Keep Accounts for user |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get Keep Accounts for user | [ [KeepAccount](#keepaccount) ] |
 
 ### /v1/income
 ---
@@ -170,3 +170,17 @@ API title
 | Code | Description |
 | ---- | ----------- |
 | 200 | Get user balances |
+
+### Models
+---
+
+### KeepAccount  
+
+Get Keep Accounts for user
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| name | string | Account Name | No |
+| base_currency | string | Account Base Currency | No |
+| balance | double | Account Current Balance | No |
+| user_uid | string | User Uniq ID | No |
