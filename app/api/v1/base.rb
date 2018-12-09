@@ -39,7 +39,8 @@ module API::V1
     # The documentation is accessible at http://localhost:3000/api/v1/swagger
     add_swagger_documentation base_path:   'v1',
                               mount_path:  '/swagger',
-                              api_version: 'v1'
+                              api_version: 'v1',
+                              models: [Entities::KeepAccount]
 
   end
 end
