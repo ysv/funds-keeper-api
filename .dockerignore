@@ -1,0 +1,23 @@
+# Ignore git
+.git
+.gitignore
+
+# JetBrains IDE files
+.idea
+
+# Ignore docker stuff
+.dockerignore
+
+# Ignore CI related files
+ci
+.travis.yml
+
+# Ignore files for development
+.ruby-version
+.rspec
+
+.DS_Store
+*.md
+docs
+tmp
+log
