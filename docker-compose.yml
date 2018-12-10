@@ -14,9 +14,9 @@ services:
 
 
   api:
-    image: syaroslav/funds-keeper-api:0.0.2
+    image: syaroslav/funds-keeper-api:0.0.5
     ports:
-      - "8080:8080"
+      - "3000:3000"
     depends_on:
       - db
     environment:
