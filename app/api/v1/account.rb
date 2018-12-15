@@ -8,7 +8,8 @@ module API::V1
       present KeepAccount.where(user_uid: uid), with: Entities::KeepAccount
     end
 
-    desc 'Create Keep Account'
+    desc 'Create Keep Account',
+         success: Entities::KeepAccount
     params do
       requires :name,
                type: String,
@@ -34,14 +35,15 @@ module API::V1
       present ka, with: Entities::KeepAccount
     end
 
-
-    ### EXPENSE !!!
-    desc 'Get Expense Accounts for user'
+    desc 'Get Expense Accounts for user',
+         is_array: true,
+         success: Entities::ExpenseAccount
     get '/accounts/expense' do
-      ExpenseCategory.where(user_uid: uid)
+      present ExpenseCategory.where(user_uid: uid), with: Entities::ExpenseAccount
     end
 
-    desc 'Create Expense Account'
+    desc 'Create Expense Account',
+         success: Entities::ExpenseAccount
     params do
       requires :name,
                type: String,
@@ -50,7 +52,7 @@ module API::V1
                type: String,
                default: 'usd',
                values: CurrencyRatesService.currencies.yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
-      optional :month_expense,
+      optional :month_expenses_limit,
                type: BigDecimal,
                default: 0.to_d
     end
@@ -59,8 +61,8 @@ module API::V1
         user_uid: uid,
         name: params[:name],
         base_currency: params[:base_currency],
-        month_expense: params[:month_expense]
-      )
+        month_expenses: params[:month_expenses_limit]
+      ).tap { |ec| present ec, with: Entities::ExpenseAccount }
     end
   end
 end
