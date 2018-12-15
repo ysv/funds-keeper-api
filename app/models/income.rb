@@ -4,6 +4,12 @@ class Income < ApplicationRecord
   belongs_to :keep_account
   has_one :income_operation, as: :parent, class_name: 'Operation'
 
+  delegate :base_currency, to: :keep_account
+
+  def base_amount
+    income_operation.credit
+  end
+
   def record_operation!(amount)
     Operation.create(credit: amount, parent: self, account: keep_account)
   end

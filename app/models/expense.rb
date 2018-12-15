@@ -5,9 +5,25 @@ class Expense < ApplicationRecord
   belongs_to :expense_category
 
   has_one :income_operation, -> { where(credit: 0)}, as: :parent, class_name: 'Operation'
-  has_one(:expense_operation, -> { where(debit: 0)}, as: :parent, class_name: 'Operation')
+  has_one :expense_operation, -> { where(debit: 0)}, as: :parent, class_name: 'Operation'
 
-  def record_operations!(base_amount:, quote_amount:)
+  delegate :base_currency, to: :keep_account
+  delegate :quote_currency, to: :expense_category
+
+  def base_amount
+    income_operation.debit
+  end
+
+  def quote_amount
+    expense_operation.credit
+  end
+
+  def record_operations!(base_amount:, quote_amount: nil)
+    if quote_amount.blank?
+      rate = CurrencyRatesService.get_rate(keep_account.base_currency,
+                                           expense_category.base_currency)
+      quote_amount = base_amount * rate
+    end
     transaction do
       Operation.create(debit: base_amount, parent: self, account: keep_account)
       Operation.create(credit: quote_amount, parent: self, account: expense_category)
