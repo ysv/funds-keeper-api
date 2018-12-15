@@ -17,11 +17,13 @@ module API::V1
       optional :base_currency,
                type: String,
                default: 'usd',
-               values: CurrencyRatesService.currencies
+               values: CurrencyRatesService.currencies,
+               desc: 'Account Base Currency'
       optional :initial_balance,
                type: BigDecimal,
                default: 0.to_d,
-               values: 0.to_d..10**10.to_d
+               values: 0.to_d..10**10.to_d,
+               desc: 'Initial Balance to be put on Account.'
     end
     post '/accounts/keep' do
       ka = KeepAccount.create!(
@@ -51,10 +53,13 @@ module API::V1
       optional :base_currency,
                type: String,
                default: 'usd',
-               values: CurrencyRatesService.currencies.yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
+               values: CurrencyRatesService.currencies,
+               desc: 'Account Base Currency.'
       optional :month_expenses_limit,
                type: BigDecimal,
-               default: 0.to_d
+               default: 0.to_d,
+               values: 0.to_d..10**10.to_d,
+               desc: 'Account Month Expense Limit.'
     end
     post '/accounts/expense' do
       ExpenseCategory.create!(
