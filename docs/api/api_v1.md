@@ -24,22 +24,22 @@ API title
 | ---- | ---------- | ----------- | -------- | ---- |
 | name | formData | Account name. | Yes | string |
 | base_currency | formData |  | No | string |
-| month_expense | formData |  | No | double |
+| month_expenses_limit | formData |  | No | double |
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 201 | Create Expense Account |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 201 | Create Expense Account | [ExpenseAccount](#expenseaccount) |
 
 ##### ***GET***
 **Description:** Get Expense Accounts for user
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Get Expense Accounts for user |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get Expense Accounts for user | [ [ExpenseAccount](#expenseaccount) ] |
 
 ### /v1/accounts/keep
 ---
@@ -56,9 +56,9 @@ API title
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 201 | Create Keep Account |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 201 | Create Keep Account | [KeepAccount](#keepaccount) |
 
 ##### ***GET***
 **Description:** Get Keep Accounts for user
@@ -173,6 +173,18 @@ API title
 
 ### Models
 ---
+
+### ExpenseAccount  
+
+Get Expense Accounts for user
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| name | string | Account Name | No |
+| base_currency | string | Account Base Currency | No |
+| balance | double | Account Current Balance | No |
+| user_uid | string | User Uniq ID | No |
+| month_expenses_limit | string | Account Month Expenses Limit | No |
 
 ### KeepAccount  
 

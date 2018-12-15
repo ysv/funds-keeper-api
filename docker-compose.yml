@@ -14,7 +14,7 @@ services:
 
 
   api:
-    image: syaroslav/funds-keeper-api:0.0.6
+    image: syaroslav/funds-keeper-api:0.0.7
     ports:
       - "3000:3000"
     depends_on:
