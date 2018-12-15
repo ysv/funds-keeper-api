@@ -32,12 +32,17 @@ RSpec.configure do |config|
   end
 
   config.before :each do
+    binding.pry
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
   end
 
   config.before :each do
     Faker::UniqueGenerator.clear
+  end
+
+  config.before :all do
+    WebMock.disable_net_connect!
   end
 
   config.include FactoryBot::Syntax::Methods

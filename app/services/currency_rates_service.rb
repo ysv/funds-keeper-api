@@ -18,6 +18,10 @@ class CurrencyRatesService
        "RUB"]
         .yield_self { |codes| codes.map(&:upcase) + codes.map(&:downcase) }
     end
+
+    def get_rate(base_currency, quote_currency)
+      CurrencyRatesService.new(base_currency).rate(quote_currency)
+    end
   end
 
   def initialize(base)

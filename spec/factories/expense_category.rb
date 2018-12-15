@@ -1,6 +1,4 @@
 FactoryBot.define do
-  sequence(:expense_limit) { Faker::Number.decimal(3, 2).to_d + 1 }
-
   factory :expense_category do
     name { Faker::Vehicle.unique.make_and_model }
     base_currency { CurrencyRatesService.currencies.sample }
