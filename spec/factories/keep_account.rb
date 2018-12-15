@@ -1,5 +1,5 @@
 FactoryBot.define do
-  sequence(:balance) { Faker::Number.decimal(3, 2) }
+  sequence(:balance) { Faker::Number.decimal(3, 2).to_d + 1 }
 
   factory :keep_account do
     name { Faker::Bank.unique.name }

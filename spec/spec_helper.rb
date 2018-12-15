@@ -36,6 +36,10 @@ RSpec.configure do |config|
     DatabaseCleaner.start
   end
 
+  config.before :each do
+    Faker::UniqueGenerator.clear
+  end
+
   config.include FactoryBot::Syntax::Methods
 
   # rspec-mocks config goes here. You can use an alternate test double
@@ -55,7 +59,9 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-# The settings below are suggested to provide a good initial experience
+  config.order = :random
+
+  # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
   # This allows you to limit a spec run to individual examples or groups
@@ -96,7 +102,7 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = :random
+
 
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
