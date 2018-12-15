@@ -14,4 +14,4 @@ migrate:
 	$(COMPOSE) run --rm api bash -c "bundle exec rake db:create db:migrate"
 
 down:
-	$(COMPOSE) down
+	$(COMPOSE) stop && $(COMPOSE) rm -f

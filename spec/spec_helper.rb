@@ -32,7 +32,6 @@ RSpec.configure do |config|
   end
 
   config.before :each do
-    binding.pry
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
   end
