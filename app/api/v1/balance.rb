@@ -7,6 +7,7 @@ module API::V1
       total_expense = ::Expense.total_by(user_uid: uid)
       {
         balance: total_income - total_expense,
+        nickname: uid,
         income: {
           month: ::Income.total_by(user_uid: uid, from: month_start),
           total: total_income
