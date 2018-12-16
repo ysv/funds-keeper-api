@@ -11,8 +11,8 @@ module API::V1
     use Auth::Middleware
     helpers API::V1::Helpers
 
-    rescue_from(ActiveRecord::RecordNotFound) do |_e|
-      error!('Record is not found', 404)
+    rescue_from(ActiveRecord::RecordNotFound) do |e|
+      error!(e.message, 400)
     end
 
     rescue_from Peatio::Auth::Error do |e|
@@ -29,7 +29,6 @@ module API::V1
     end
 
     rescue_from(:all) do |e|
-      binding.pry
       Rails.logger.error "#{e.class}: #{e.message}"
       error!('Something went wrong', 500)
     end
