@@ -16,7 +16,7 @@ module API::V1
      expose :balance,
             documentation: {
               desc: 'Account Current Balance',
-              type: BigDecimal,
+              type: String,
             }
 
      expose :user_uid,

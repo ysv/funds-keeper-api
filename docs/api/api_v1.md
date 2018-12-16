@@ -23,8 +23,8 @@ API title
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | name | formData | Account name. | Yes | string |
-| base_currency | formData |  | No | string |
-| month_expenses_limit | formData |  | No | double |
+| base_currency | formData | Account Base Currency. | No | string |
+| month_expenses_limit | formData | Account Month Expense Limit. | No | double |
 
 **Responses**
 
@@ -51,8 +51,8 @@ API title
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | name | formData | Account name. | Yes | string |
-| base_currency | formData |  | No | string |
-| initial_balance | formData |  | No | double |
+| base_currency | formData | Account Base Currency | No | string |
+| initial_balance | formData | Initial Balance to be put on Account. | No | double |
 
 **Responses**
 
@@ -69,7 +69,7 @@ API title
 | ---- | ----------- | ------ |
 | 200 | Get Keep Accounts for user | [ [KeepAccount](#keepaccount) ] |
 
-### /v1/income
+### /v1/incomes
 ---
 ##### ***POST***
 **Description:** Record User income
@@ -100,9 +100,9 @@ API title
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Get User incomes |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get User incomes | [ [Income](#income) ] |
 
 ### /v1/rates
 ---
@@ -122,7 +122,7 @@ API title
 | ---- | ----------- |
 | 200 | Get currency rates |
 
-### /v1/expense
+### /v1/expenses
 ---
 ##### ***POST***
 **Description:** Record User expense
@@ -156,9 +156,9 @@ API title
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Get User Expenses |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get User Expenses | [ [Expense](#expense) ] |
 
 ### /v1/balances
 ---
@@ -182,7 +182,7 @@ Get Expense Accounts for user
 | ---- | ---- | ----------- | -------- |
 | name | string | Account Name | No |
 | base_currency | string | Account Base Currency | No |
-| balance | double | Account Current Balance | No |
+| balance | string | Account Current Balance | No |
 | user_uid | string | User Uniq ID | No |
 | month_expenses_limit | string | Account Month Expenses Limit | No |
 
@@ -194,5 +194,32 @@ Get Keep Accounts for user
 | ---- | ---- | ----------- | -------- |
 | name | string | Account Name | No |
 | base_currency | string | Account Base Currency | No |
-| balance | double | Account Current Balance | No |
+| balance | string | Account Current Balance | No |
 | user_uid | string | User Uniq ID | No |
+
+### Income  
+
+Get User incomes
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| amount | string | Income Amount. | No |
+| currency | string | Income Currency. | No |
+| keep_account | string | Keep Account Name. | No |
+| description | string | Income Transaction description. | No |
+| recorded_at | string | Income Transaction date | No |
+
+### Expense  
+
+Get User Expenses
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| base_amount | string | Expense Amount in Keep Account Currency. | No |
+| base_currency | string | Currency of Keep Account. | No |
+| quote_amount | string | Expense Amount in Expense Account Currency. | No |
+| quote_currency | string | Currency of Expense Account. | No |
+| keep_account | string | Keep Account Name. | No |
+| expense_account | string | Expense Account Name. | No |
+| description | string | Expense Transaction description. | No |
+| recorded_at | string | Expense Transaction date | No |
