@@ -140,9 +140,9 @@ API title
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 201 | Record User expense |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 201 | Record User expense | [Expense](#expense) |
 
 ##### ***GET***
 **Description:** Get User Expenses
@@ -167,9 +167,9 @@ API title
 
 **Responses**
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Get user balances |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get user balances | [Balances](#balances) |
 
 ### Models
 ---
@@ -223,3 +223,21 @@ Get User Expenses
 | expense_account | string | Expense Account Name. | No |
 | description | string | Expense Transaction description. | No |
 | recorded_at | string | Expense Transaction date | No |
+
+### Balances  
+
+Get user balances
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| balance | double | Current User Balance in base currency. | No |
+| nickname | string | User nickname. | No |
+| income | [AccountBalance](#accountbalance) | User income info | No |
+| expense | [AccountBalance](#accountbalance) | User expense info | No |
+
+### AccountBalance  
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| month | double | Account month cash flow | No |
+| total | double | Account total cash flow | No |

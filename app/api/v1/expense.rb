@@ -18,7 +18,8 @@ module API::V1
       present ::Expense.where(keep_account: ka), with: Entities::Expense
     end
 
-    desc 'Record User expense'
+    desc 'Record User expense',
+         success: Entities::Expense
     params do
       requires :keep_account_name,
                type: String,
