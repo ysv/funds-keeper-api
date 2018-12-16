@@ -22,6 +22,15 @@ module FundsKeeperApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    # Add this to your application.rb
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
     # Initialize grape.
     config.eager_load_paths += Dir[Rails.root.join('app')]
     # Settings in config/environments/* take precedence over those specified here.

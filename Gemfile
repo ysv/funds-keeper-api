@@ -14,7 +14,7 @@ gem 'peatio', git: 'https://git@github.com/ysv/peatio-core', branch: 'funds-keep
 gem 'puma', '~> 3.12.0'
 gem 'faraday', '~> 0.14.0'
 gem 'memoist'
-
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   gem 'pry-byebug'
