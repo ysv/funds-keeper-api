@@ -1,6 +1,7 @@
 module API::V1
   class Rates < Grape::API
-    desc 'Get currency rates'
+    desc 'Get currency rates',
+         success: BigDecimal
     params do
       requires :base,
                type: String,

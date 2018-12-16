@@ -1,6 +1,8 @@
 module API::V1
   class Expense < Grape::API
-    desc 'Get User Expenses'
+    desc 'Get User Expenses',
+         is_array: true,
+         success: Entities::Expense
     params do
       optional :keep_account_name,
                type: String,
@@ -9,11 +11,11 @@ module API::V1
                type: String,
                desc: 'Expense account name for filtering expenses.'
     end
-    get '/expense' do
+    get '/expenses' do
       ka = KeepAccount.where(user_uid: uid)
       ka = ka.where(name: params[:keep_account_name]) if params[:keep_account_name].present?
       ka = ka.where(name: params[:expense_account_name]) if params[:expense_account_name].present?
-      ::Income.where(keep_account: ka)
+      present ::Expense.where(keep_account: ka), with: Entities::Expense
     end
 
     desc 'Record User expense'
@@ -41,7 +43,7 @@ module API::V1
                default: ->{ Time.now },
                desc: 'Expense operation time.'
     end
-    post '/expense' do
+    post '/expenses' do
       ka = KeepAccount.find_by!(user_uid: uid, name: params[:keep_account_name])
       ec = ExpenseCategory.find_by!(user_uid: uid, name: params[:expense_account_name])
 
@@ -56,7 +58,7 @@ module API::V1
           base_amount: params[:base_amount],
           quote_amount: params[:quote_amount]
         )
-        expense
+        present expense, with: Entities::Expense
       end
     end
   end
