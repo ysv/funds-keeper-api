@@ -7,8 +7,13 @@ class Expense < ApplicationRecord
   has_one :income_operation, -> { where(credit: 0)}, as: :parent, class_name: 'Operation'
   has_one :expense_operation, -> { where(debit: 0)}, as: :parent, class_name: 'Operation'
 
-  delegate :base_currency, to: :keep_account
-  delegate :quote_currency, to: :expense_category
+  def base_currency
+    keep_account.base_currency
+  end
+
+  def quote_currency
+    expense_category.base_currency
+  end
 
   def base_amount
     income_operation.debit

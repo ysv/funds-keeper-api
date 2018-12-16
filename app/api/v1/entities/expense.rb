@@ -2,16 +2,26 @@ module API::V1
   module Entities
     class Expense < Grape::Entity
       expose :base_amount,
-             as: :amount,
              documentation: {
-               desc: 'Income Amount.',
+               desc: 'Expense Amount in Keep Account Currency.',
                type: String,
              }
 
       expose :base_currency,
-             as: :currency,
              documentation: {
-               desc: 'Income Currency.',
+               desc: 'Currency of Keep Account.',
+               type: String,
+             }
+
+      expose :quote_amount,
+             documentation: {
+               desc: 'Expense Amount in Expense Account Currency.',
+               type: String,
+             }
+
+      expose :quote_currency,
+             documentation: {
+               desc: 'Currency of Expense Account.',
                type: String,
              }
 
@@ -21,16 +31,22 @@ module API::V1
                type: String
              }) { |income| income.keep_account.name }
 
+      expose(:expense_account,
+             documentation: {
+               desc: 'Expense Account Name.',
+               type: String
+             }) { |expense| expense.expense_category.name }
+
       expose :description,
              documentation: {
-               desc: 'Income Transaction description.',
+               desc: 'Expense Transaction description.',
                type: String
              }
 
       # TODO: Check that it's String.
       expose :recorded_at,
              documentation: {
-               desc: 'Income Transaction date',
+               desc: 'Expense Transaction date',
                type: String
              }
     end
