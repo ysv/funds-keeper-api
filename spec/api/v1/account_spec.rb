@@ -82,6 +82,20 @@ describe API::V1::Account, 'POST /api/v1/accounts/keep', type: :request do
       expect(ka.balance).to eq 9876.to_d
     end
   end
+
+  context 'existing account' do
+    let(:keep_account) { create(:keep_account_with_balance, user_uid: uid) }
+
+    before do
+      data.merge!(name: keep_account.name)
+    end
+
+    it { is_expected.to have_http_status 400 }
+
+    it 'returns error message' do
+      expect(response_body[:error]).to include('Name has already been taken')
+    end
+  end
 end
 
 describe API::V1::Account, 'GET /api/v1/accounts/expense', type: :request do
@@ -166,6 +180,20 @@ describe API::V1::Account, 'POST /api/v1/accounts/expense', type: :request do
       ka = ExpenseCategory.find_by(user_uid: uid, name: response_body[:name])
       expect(response_body[:month_expenses_limit]).to eq 1234.to_d.to_s
       expect(ka.month_expenses).to eq 1234.to_d
+    end
+  end
+
+  context 'existing account' do
+    let(:expense_category) { create(:expense_category_with_limit, user_uid: uid) }
+
+    before do
+      data.merge!(name: expense_category.name)
+    end
+
+    it { is_expected.to have_http_status 400 }
+
+    it 'returns error message' do
+      expect(response_body[:error]).to include('Name has already been taken')
     end
   end
 end

@@ -24,7 +24,12 @@ module API::V1
       error!(error.message, 400)
     end
 
+    rescue_from(ActiveRecord::RecordInvalid) do |e|
+      error!(e.message, 400)
+    end
+
     rescue_from(:all) do |e|
+      binding.pry
       Rails.logger.error "#{e.class}: #{e.message}"
       error!('Something went wrong', 500)
     end

@@ -1,6 +1,8 @@
 class ExpenseCategory < ApplicationRecord
   include HasManyOperations
   has_many :expenses
+
+  validates :name, uniqueness: { scope: %i[user_uid] }
 end
 
 # == Schema Information

@@ -34,13 +34,16 @@ module API::V1
     end
     post '/incomes' do
       ka = KeepAccount.find_by!(user_uid: uid, name: params[:account_name])
-      ka.transaction do
-        income = ::Income.create!(
-          description: params[:description],
-          recorded_at: params[:date],
-          keep_account: ka)
+      income = ::Income.new(
+        description: params[:description],
+        recorded_at: params[:date],
+        keep_account: ka
+      )
+      income.transaction do
+        income.save!
         income.record_operation!(params[:amount])
       end
+      present income, with: Entities::Income
     end
   end
 end

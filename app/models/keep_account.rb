@@ -3,6 +3,8 @@ class KeepAccount < ApplicationRecord
   has_many :incomes
   has_many :expenses
 
+  validates :name, uniqueness: { scope: %i[user_uid] }
+
   def create_initial_income!(amount)
     income = Income.create!(
       keep_account: self,
