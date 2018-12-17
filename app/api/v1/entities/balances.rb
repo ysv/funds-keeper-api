@@ -24,7 +24,7 @@ module API::V1
                desc: 'User expense info',
                type: Entities::AccountBalance
              }) do |balances, _options|
-                  Entities::AccountBalance.represent OpenStruct.new(balances[:income])
+                  Entities::AccountBalance.represent OpenStruct.new(balances[:expense])
                 end
     end
   end
