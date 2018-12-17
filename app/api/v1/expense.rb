@@ -13,9 +13,11 @@ module API::V1
     end
     get '/expenses' do
       ka = KeepAccount.where(user_uid: uid)
+      ec = ExpenseCategory.where(user_uid: uid)
       ka = ka.where(name: params[:keep_account_name]) if params[:keep_account_name].present?
-      ka = ka.where(name: params[:expense_account_name]) if params[:expense_account_name].present?
-      present ::Expense.where(keep_account: ka), with: Entities::Expense
+      ec = ec.where(name: params[:expense_account_name]) if params[:expense_account_name].present?
+      present ::Expense.where(keep_account: ka, expense_category: ec),
+              with: Entities::Expense
     end
 
     desc 'Record User expense',
